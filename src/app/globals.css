@@ -24,23 +24,20 @@ h1 {
   font-size: 8rem;
   background: linear-gradient(to right, #4B0082, #7621ff, #8120ff, #c020ff, #FF21C1);
   -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  color: black; /* Fallback color */
+  -webkit-background-clip: text; /* Fallback color */
 }
 
-.bitcoinicon {
-  margin-right: 5rem;
-  width: 5rem;
-  height: 5rem;
-  color: #f7931a;
-  background-color: transparent;
+.bounce {
+  animation: bounce 2s infinite ease-in-out;
 }
 
-.ethereumicon {
-  margin-left: 5rem;
-  width: 5rem;
-  height: 5rem;
-  color: #88aaf1;
+@keyframes bounce {
+  0%, 100% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-20px);
+  }
 }
 
 @layer utilities {
@@ -48,3 +45,4 @@ h1 {
     text-wrap: balance;
   }
 }
+
