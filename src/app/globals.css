@@ -18,6 +18,7 @@
 
 body {
   background-image: linear-gradient(#30336b, black);
+  color: white;
 }
 
 h1 {
@@ -58,6 +59,61 @@ h1 {
 .navlink:hover {
   color: #c020ff; /* Change the color to whatever you prefer */
 }
+
+.market-table-container {
+  margin-top: 20px;
+  width: 45%;
+}
+
+.market-table-header {
+  background-image: linear-gradient(45deg, #6b21a8, #7621ff, #8120ff, #c020ff, #a21caf);
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 1rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.market-table-header h3:first-child{
+  text-align: start;
+}
+
+.market-table-header h3:last-child{
+  text-align: end;
+}
+
+.market-table-header h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.market-table {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.market-table-item {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 1rem;
+  color: white;
+  border-bottom: white 1px solid;
+  margin-bottom: 10px;
+}
+
+.market-table-item div:first-child{
+  text-align: start;
+}
+
+.market-table-item div:last-child{
+  text-align: end;
+}
+
 
 @keyframes bounce {
   0%, 100% {
