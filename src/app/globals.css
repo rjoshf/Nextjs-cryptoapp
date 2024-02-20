@@ -51,6 +51,14 @@ h1 {
   animation: bounce 2s infinite ease-in-out;
 }
 
+.navlink {
+  transition: color 0.3s ease;
+}
+
+.navlink:hover {
+  color: #c020ff; /* Change the color to whatever you prefer */
+}
+
 @keyframes bounce {
   0%, 100% {
       transform: translateY(0);
