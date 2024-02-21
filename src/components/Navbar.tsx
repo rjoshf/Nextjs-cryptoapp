@@ -17,6 +17,8 @@ const Navbar: React.FC<{}> = ({ }) => {
 
         window.addEventListener("scroll", handleScroll);
 
+        handleScroll();
+
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };

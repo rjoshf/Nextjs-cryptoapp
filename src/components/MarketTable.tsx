@@ -28,7 +28,7 @@ const MarketTable: React.FC<{ cryptos: Crypto[] }> = ({ cryptos }) => {
                     </div>
                     <div>{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(crypto.current_price)}`}</div>
                     <div style={{ color: crypto.price_change_percentage_24h > 0 ? 'lightgreen' : 'red' }}>{crypto.price_change_percentage_24h.toFixed(2)}%</div>
-                    <div>{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(crypto.market_cap)}`}</div>
+                    <div>{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(crypto.market_cap)}`}</div>
                 </li>)}
             </ul>
         </div>
