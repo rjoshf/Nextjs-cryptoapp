@@ -13,10 +13,9 @@ async function getTopCryptos() {
 
 export default async function MarketFecther() {
     const cryptos = await getTopCryptos()
-    console.log(cryptos)
     return (
         <section className="flex flex-col items-center">
-            <h2 className="text-white font-bold text-5xl m-24">Market Update</h2>
+            <h2 className="font-bold text-7xl mt-20 mb-10 market-update-title">Market Update</h2>
             <MarketTable cryptos={cryptos} />
         </section>
     )
