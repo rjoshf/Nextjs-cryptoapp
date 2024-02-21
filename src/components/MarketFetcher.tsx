@@ -1,4 +1,4 @@
-import MarketTable from './MarketTable'
+import MarketTable from './MarketTable';
 
 async function getTopCryptos() {
     const API_KEY = process.env.API_KEY
@@ -14,8 +14,8 @@ async function getTopCryptos() {
 export default async function MarketFecther() {
     const cryptos = await getTopCryptos()
     return (
-        <section className="flex flex-col items-center">
-            <h2 className="font-bold text-7xl mt-20 mb-10 market-update-title">Market Update</h2>
+        <section className="flex flex-col items-center mt-20">
+            <h2 className="font-bold text-7xl mb-10 market-update-title">Market Update</h2>
             <MarketTable cryptos={cryptos} />
         </section>
     )

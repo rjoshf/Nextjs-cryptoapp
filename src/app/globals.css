@@ -17,7 +17,7 @@
 }
 
 body {
-  background-image: linear-gradient(#30336b, black);
+  background-image: linear-gradient(#30336b, #2b2e5f, #212449, #181a35, #121327, #0b0c18, black);
   color: white;
 }
 
@@ -50,6 +50,10 @@ h1 {
 
 .bounce {
   animation: bounce 2s infinite ease-in-out;
+}
+
+.navbar.fixed {
+  background-color: #30336b;
 }
 
 .navlink {
