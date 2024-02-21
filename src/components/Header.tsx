@@ -17,7 +17,7 @@ const Header: React.FC<{}> = ({ }) => {
             </div>
             <motion.button whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 100 }} className="signupButton mt-14">Sign Up</motion.button>
             <h2 className="inline font-bold text-5xl text-white mt-14 mb-14"><span className="text-purple-800">Sign up</span> to create your <span className="text-fuchsia-700">wallet!</span></h2>
-            <Image src={headerImg} alt={"Image of a wallet"} width={350} height={350} />
+            <Image src={headerImg} alt={"Image of man sitting on coins"} width={350} height={350} />
         </section>
     )
 }
