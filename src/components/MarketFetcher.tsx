@@ -16,7 +16,7 @@ async function getTopCryptos() {
                 } catch (error) {
                     reject(error);
                 }
-            }, 750);
+            }, 1000);
         });
     };
     return fetchData();

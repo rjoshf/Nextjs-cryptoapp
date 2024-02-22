@@ -118,6 +118,13 @@ h1 {
   text-align: end;
 }
 
+.info-title {
+  font-size: 4.5rem;
+  background: linear-gradient(45deg, #6b21a8, #7621ff, #8120ff, #c020ff, #a21caf);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
 
 @keyframes bounce {
   0%, 100% {
