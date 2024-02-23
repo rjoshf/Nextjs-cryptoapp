@@ -22,7 +22,7 @@ const MarketTable: React.FC<{ cryptos: Crypto[] | unknown }> = ({ cryptos }) => 
                 <h3>Market Cap</h3>
             </div>
             {Array.isArray(cryptos) && <ul>
-                {cryptos.map((crypto: Crypto) => <li className="text-black market-table-item" key={crypto.id}>
+                {cryptos.map((crypto: Crypto) => <li className="market-table-item" key={crypto.id}>
                     <div className="flex items-center justify-start">
                         <Image className="mr-5" width={30} height={30} src={crypto.image} alt={crypto.name} />
                         <div>{crypto.name}</div>
