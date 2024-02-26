@@ -30,7 +30,7 @@ const Navbar: React.FC<{}> = ({ }) => {
             <nav className={`navbar flex flex-row items-center justify-between px-20 py-10 h-12 ${isFixed ? 'fixed z-10 top-0 w-full' : ''}`}>
                 <Link href="/" className="navlink text-white font-bold text-2xl">NextCrypto</Link>
                 <div>
-                    <Link href="/" className="navlink text-white font-bold text-2xl mr-10">Log In</Link>
+                    <Link href="/login" className="navlink text-white font-bold text-2xl mr-10">Log In</Link>
                     <Link href="/" className="navlink text-white font-bold text-2xl">Sign Up</Link>
                 </div>
             </nav>
