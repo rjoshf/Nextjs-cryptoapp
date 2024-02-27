@@ -1,4 +1,14 @@
+'use client'
+
+import { useState } from 'react';
+
 const Login: React.FC<{}> = ({ }) => {
+    const [isLogin, setIsLogin] = useState(true);
+
+    function switchAuthModeHandler() {
+        setIsLogin((prevState) => !prevState);
+    }
+
     return (
         <>
             <h1 className="text-center">Login</h1>
@@ -11,8 +21,15 @@ const Login: React.FC<{}> = ({ }) => {
                     <label className="block text-center" htmlFor='password'>Your Password: </label>
                     <input type='password' id='password' required />
                 </div>
-                <div>
-                    <button>Log In</button>
+                <div className="flex flex-col items-center justify-center">
+                    <button>{isLogin ? 'Login' : 'Create Account'}</button>
+                    <button
+                        type='button'
+                        onClick={switchAuthModeHandler}
+                        className="block"
+                    >
+                        {isLogin ? 'Create new account' : 'Login with existing account'}
+                    </button>
                 </div>
             </form>
         </>
