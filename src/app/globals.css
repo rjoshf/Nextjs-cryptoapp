@@ -48,6 +48,10 @@ h1 {
   background-color: #c020ff;
 }
 
+.loginButton:hover {
+  background-color: #7621ff;
+}
+
 .bounce {
   animation: bounce 2s infinite ease-in-out;
 }
