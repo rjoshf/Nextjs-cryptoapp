@@ -31,10 +31,9 @@ h1 {
 .signupButton {
   color: white;
   font: inherit;
-  width: 15%;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   cursor: pointer;
-  padding: 0.85rem 1.5rem;
+  padding: 1.25rem 5rem;
   border: none;
   background-image: linear-gradient(45deg, #6b21a8, #7621ff, #8120ff, #c020ff, #a21caf);
   border-radius: 35px;
