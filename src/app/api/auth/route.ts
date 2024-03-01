@@ -17,13 +17,28 @@ export async function POST(req: NextRequest, res: NextResponse) {
         }
 
         const client = await connectToDatabase();
+
         const db = client.db();
+
+        const existingUser = await db.collection('users').findOne({email: email});
+
+        if (existingUser) {
+            client.close();
+            return NextResponse.json({
+                message: 'User exists already!',
+            }, {
+                status: 422,
+            });
+        }
+
         const hashedPassword = await hashPassword(password);
 
         const result = await db.collection('users').insertOne({
             email: email,
             password: hashedPassword,
         });
+
+        client.close();
 
         return NextResponse.json({
             message: 'Created user!',
