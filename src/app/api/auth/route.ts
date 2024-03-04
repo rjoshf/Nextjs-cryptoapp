@@ -31,6 +31,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
             });
         }
 
+        //encrypt the password incase of a database leak
         const hashedPassword = await hashPassword(password);
 
         const result = await db.collection('users').insertOne({
