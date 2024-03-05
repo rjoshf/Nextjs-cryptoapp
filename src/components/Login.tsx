@@ -1,11 +1,12 @@
 'use client'
 
 import { useState, useRef } from 'react';
+import { signIn } from 'next-auth/react';
 
 import { motion } from 'framer-motion';
 
 async function createUser(email: string, password: string) {
-    const response = await fetch('/api/auth', {
+    const response = await fetch('/api/createuser', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
         headers: {
@@ -13,7 +14,7 @@ async function createUser(email: string, password: string) {
         }
     });
 
-    const data = response.json();
+    const data = await response.json();
 
     if (!response.ok) {
         throw new Error('Something went wrong.');
@@ -42,7 +43,8 @@ const Login: React.FC<{}> = ({ }) => {
         }
 
         if (isLogin) {
-            // log user in
+            const result = await signIn('credentials', { redirect: false, email: enteredEmail, password: enteredPassword, })
+            console.log(result)
         } else {
             try {
                 const result = await createUser(enteredEmail, enteredPassword);
