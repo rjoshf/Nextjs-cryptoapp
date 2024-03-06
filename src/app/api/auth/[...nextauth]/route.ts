@@ -3,10 +3,12 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { connectToDatabase } from '../../../../../lib/db'
 import { verifyPassword } from '../../../../../lib/auth'
 
-const handler = NextAuth({
+export const authOptions = {
   session: {
-    strategy: 'jwt',
+    strategy: 'jwt' as const,
   },
+  
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -47,6 +49,8 @@ const handler = NextAuth({
       },
     }),
   ],
-});
+};
+
+const handler = NextAuth(authOptions)
 
 export {handler as GET, handler as POST}

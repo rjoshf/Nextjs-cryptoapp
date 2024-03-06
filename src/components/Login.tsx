@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { signIn } from 'next-auth/react';
-
+import { useRouter } from "next/navigation";
 import { motion } from 'framer-motion';
 
 async function createUser(email: string, password: string) {
@@ -24,6 +24,7 @@ async function createUser(email: string, password: string) {
 }
 
 const Login: React.FC<{}> = ({ }) => {
+    const router = useRouter();
     const emailInputRef = useRef<HTMLInputElement>(null);
     const passwordInputRef = useRef<HTMLInputElement>(null);
     const [isLogin, setIsLogin] = useState(true);
@@ -44,7 +45,10 @@ const Login: React.FC<{}> = ({ }) => {
 
         if (isLogin) {
             const result = await signIn('credentials', { redirect: false, email: enteredEmail, password: enteredPassword, })
-            console.log(result)
+
+            if (!result!.error) {
+                router.replace('/')
+            }
         } else {
             try {
                 const result = await createUser(enteredEmail, enteredPassword);
