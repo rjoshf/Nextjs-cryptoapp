@@ -5,8 +5,7 @@ import { useState, useEffect } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 
 const Navbar: React.FC<{}> = ({ }) => {
-    const { data: session, status } = useSession();
-    const loading = status === 'loading';
+    const { data: session } = useSession();
 
     const [isFixed, setIsFixed] = useState(false);
 
@@ -21,7 +20,6 @@ const Navbar: React.FC<{}> = ({ }) => {
 
         window.addEventListener("scroll", handleScroll);
 
-        // Initial call for handleScroll to set the initial state based on the current scroll position
         handleScroll();
 
         return () => {
@@ -40,6 +38,7 @@ const Navbar: React.FC<{}> = ({ }) => {
                 <Link href="/" className="navlink text-white font-bold text-2xl">NextCrypto</Link>
                 <div>
                     {!session && <Link href="/login" className="navlink text-white font-bold text-2xl mr-10">Log In</Link>}
+                    {session && <Link href="/wallet" className="mr-10">Wallet</Link>}
                     {session && <button onClick={logoutHandler}>Logout</button>}
                 </div>
             </nav>
