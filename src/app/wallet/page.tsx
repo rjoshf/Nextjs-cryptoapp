@@ -1,3 +1,5 @@
+import Wallet from '@/components/Wallet';
+
 import { getServerSession } from 'next-auth';
 
 import { authOptions } from '../api/auth/[...nextauth]/route';
@@ -14,7 +16,7 @@ export default async function WalletPage() {
 
     return (
         <main className="min-h-screen">
-            <h1>Wallet Page</h1>
+            <Wallet />
         </main>
     )
 }
