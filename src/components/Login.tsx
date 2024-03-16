@@ -73,7 +73,7 @@ const Login: React.FC<{}> = ({ }) => {
                         <input className="text-black" type='password' id='password' required ref={passwordInputRef} />
                     </div>
                     <div className="flex flex-col items-center justify-center">
-                        <motion.button whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 100 }} className="m-5 py-3 px-8 rounded-lg bg-fuchsia-700 loginButton font-bold">{isLogin ? 'Login' : 'Create Account'}</motion.button>
+                        <motion.button whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 100 }} className="m-5 py-3 px-8 rounded-lg bg-fuchsia-700 button font-bold">{isLogin ? 'Login' : 'Create Account'}</motion.button>
                         <button
                             type='button'
                             onClick={switchAuthModeHandler}
