@@ -23,6 +23,7 @@ async function getTopCryptos() {
 
 export default async function MarketFetcher() {
     const cryptos = await getTopCryptos();
+    console.log(cryptos)
     return (
         <MarketTable cryptos={cryptos} />
     );
