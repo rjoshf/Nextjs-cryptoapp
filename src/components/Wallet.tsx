@@ -1,7 +1,7 @@
 import WalletDashboard from './WalletDashboard';
 
 //API call for btc and eth prices
-async function getTopCryptos() {
+async function getCryptoPrices() {
     const url = `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&x_cg_demo_api_key=${process.env.API_KEY}`;
 
     return fetch(url, {
@@ -20,7 +20,7 @@ async function getTopCryptos() {
 
 export default async function Wallet() {
 
-    const cryptos = await getTopCryptos();
+    const cryptos = await getCryptoPrices();
 
     return (
         <WalletDashboard cryptos={cryptos} />

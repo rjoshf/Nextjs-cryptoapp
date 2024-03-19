@@ -2,18 +2,12 @@
 
 import { motion } from 'framer-motion';
 
-interface Crypto {
-    id: string;
-    image: string;
-    name: string;
-    current_price: number;
-    price_change_percentage_24h: number;
-    market_cap: number;
+interface Cryptos {
+    bitcoin: { usd: number },
+    ethereum: { usd: number },
 }
 
-const WalletDashboard: React.FC<{ cryptos: Crypto[] | unknown }> = ({ cryptos }) => {
-
-    console.log(cryptos)
+const WalletDashboard: React.FC<{ cryptos: Cryptos }> = ({ cryptos }) => {
 
     return (
         <motion.section viewport={{ once: true, amount: 0.8 }} initial={{ opacity: 0, y: 15, scale: 0.99 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} transition={{ type: 'tween', duration: 0.75 }}>
@@ -27,6 +21,8 @@ const WalletDashboard: React.FC<{ cryptos: Crypto[] | unknown }> = ({ cryptos })
                 <h2>Amount</h2>
                 <h2>Price</h2>
                 <h2>Total</h2>
+                <div>{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(cryptos.bitcoin.usd)}`}</div>
+                <div>{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(cryptos.ethereum.usd)}`}</div>
             </div>
         </motion.section>
     )
