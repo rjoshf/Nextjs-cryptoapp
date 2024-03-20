@@ -17,12 +17,24 @@ const WalletDashboard: React.FC<{ cryptos: Cryptos }> = ({ cryptos }) => {
                     <button className="m-5 py-3 px-8 rounded-lg bg-fuchsia-700 button font-bold">Deposit</button>
                     <button className="m-5 py-3 px-8 rounded-lg bg-fuchsia-700 button font-bold">Withdraw</button>
                 </div>
-                <h2>Coin</h2>
-                <h2>Amount</h2>
-                <h2>Price</h2>
-                <h2>Total</h2>
-                <div>{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(cryptos.bitcoin.usd)}`}</div>
-                <div>{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(cryptos.ethereum.usd)}`}</div>
+                <div className="grid grid-cols-4 gap-4 items-center w-full">
+                    <h2>Coin</h2>
+                    <h2 className="text-center">Amount</h2>
+                    <h2 className="text-center">Price</h2>
+                    <h2 className="text-end">Total</h2>
+                </div>
+                <div className="grid grid-cols-4 gap-4 items-center w-full">
+                    <h2>Bitcoin</h2>
+                    <h2 className="text-center">0</h2>
+                    <h2 className="text-center">{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(cryptos.bitcoin.usd)}`}</h2>
+                    <h2 className="text-end">0</h2>
+                </div>
+                <div className="grid grid-cols-4 gap-4 items-center w-full">
+                    <h2>Ethereum</h2>
+                    <h2 className="text-center">0</h2>
+                    <h2 className="text-center">{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(cryptos.ethereum.usd)}`}</h2>
+                    <h2 className="text-end">0</h2>
+                </div>
             </div>
         </motion.section>
     )
