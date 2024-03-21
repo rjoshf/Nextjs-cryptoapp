@@ -7,6 +7,8 @@ import { useSession, signOut } from 'next-auth/react';
 const Navbar: React.FC<{}> = ({ }) => {
     const { data: session } = useSession();
 
+    console.log(session)
+
     const [isFixed, setIsFixed] = useState(false);
 
     useEffect(() => {
@@ -38,6 +40,7 @@ const Navbar: React.FC<{}> = ({ }) => {
                 <Link href="/" className="navlink text-white font-bold text-2xl">NextCrypto</Link>
                 <div>
                     {!session && <Link href="/login" className="navlink text-white font-bold text-2xl mr-10">Log In</Link>}
+                    <p>{session?.user?.email}</p>
                     {session && <Link href="/wallet" className="navlink text-white font-bold text-2xl mr-10">Wallet</Link>}
                     {session && <button onClick={logoutHandler} className="navlink text-white font-bold text-2xl">Logout</button>}
                 </div>
