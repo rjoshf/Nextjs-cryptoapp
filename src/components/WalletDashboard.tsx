@@ -4,6 +4,11 @@ import { motion } from 'framer-motion';
 
 import { useSession } from 'next-auth/react';
 
+import Image from 'next/image';
+
+import bitcoinImg from '../../public/bitcoin.svg';
+import ethereumImg from '../../public/ethereum.svg';
+
 interface Cryptos {
     bitcoin: { usd: number },
     ethereum: { usd: number },
@@ -32,14 +37,14 @@ const WalletDashboard: React.FC<{ cryptos: Cryptos }> = ({ cryptos }) => {
                     <h2 className="text-center">Price</h2>
                     <h2 className="text-end">Total</h2>
                 </div>
-                <div className="grid grid-cols-4 gap-4 items-center w-full">
-                    <h2>Bitcoin</h2>
+                <div className="grid grid-cols-4 gap-4 items-center w-full m-5">
+                    <h2><Image className="inline mr-2" width={25} height={25} src={bitcoinImg} alt={"Image of a bitcoin"} />Bitcoin</h2>
                     <h2 className="text-center">{session?.user?.bitcoin_amount}</h2>
                     <h2 className="text-center">{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(cryptos.bitcoin.usd)}`}</h2>
                     <h2 className="text-end">{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(bitcoinTotal)}`}</h2>
                 </div>
-                <div className="grid grid-cols-4 gap-4 items-center w-full">
-                    <h2>Ethereum</h2>
+                <div className="grid grid-cols-4 gap-4 items-center w-full m-5">
+                    <h2><Image className="inline mr-2" width={25} height={25} src={ethereumImg} alt={"Image of an ethereum"} />Ethereum</h2>
                     <h2 className="text-center">{session?.user?.ethereum_amount}</h2>
                     <h2 className="text-center">{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(cryptos.ethereum.usd)}`}</h2>
                     <h2 className="text-end">{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(ethereumTotal)}`}</h2>
