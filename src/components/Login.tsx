@@ -52,7 +52,11 @@ const Login: React.FC<{}> = ({ }) => {
         } else {
             try {
                 const result = await createUser(enteredEmail, enteredPassword);
-                console.log(result);
+                if (!result!.error) {
+                    //sign user in if no errors and the user was created.
+                    await signIn('credentials', { redirect: false, email: enteredEmail, password: enteredPassword, })
+                    router.replace('/')
+                }
             } catch (error) {
                 console.log(error);
             }
