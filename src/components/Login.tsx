@@ -28,6 +28,7 @@ const Login: React.FC<{}> = ({ }) => {
     const emailInputRef = useRef<HTMLInputElement>(null);
     const passwordInputRef = useRef<HTMLInputElement>(null);
     const [isLogin, setIsLogin] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     function switchAuthModeHandler() {
         setIsLogin((prevState) => !prevState);
@@ -36,10 +37,12 @@ const Login: React.FC<{}> = ({ }) => {
     async function submitHandler(event: React.FormEvent) {
         event.preventDefault();
 
+        setIsSubmitting(true);
         const enteredEmail = emailInputRef.current?.value;
         const enteredPassword = passwordInputRef.current?.value;
 
         if (enteredEmail === undefined || enteredPassword === undefined) {
+            setIsSubmitting(false);
             return;
         }
 
@@ -48,17 +51,19 @@ const Login: React.FC<{}> = ({ }) => {
 
             if (!result!.error) {
                 router.replace('/')
+            } else {
+                console.log(result?.error)
+                setIsSubmitting(false);
             }
         } else {
             try {
-                const result = await createUser(enteredEmail, enteredPassword);
-                if (!result!.error) {
-                    //sign user in if no errors and the user was created.
-                    await signIn('credentials', { redirect: false, email: enteredEmail, password: enteredPassword, })
-                    router.replace('/')
-                }
+                await createUser(enteredEmail, enteredPassword);
+                // Sign user in if no errors and the user was created.
+                await signIn('credentials', { redirect: false, email: enteredEmail, password: enteredPassword });
+                router.replace('/');
             } catch (error) {
                 console.log(error);
+                setIsSubmitting(false);
             }
         }
     }
@@ -77,7 +82,7 @@ const Login: React.FC<{}> = ({ }) => {
                         <input className="text-black" type='password' id='password' required ref={passwordInputRef} />
                     </div>
                     <div className="flex flex-col items-center justify-center">
-                        <motion.button whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 100 }} className="m-5 py-3 px-8 rounded-lg bg-fuchsia-700 button font-bold">{isLogin ? 'Login' : 'Create Account'}</motion.button>
+                        <motion.button whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 100 }} className="m-5 py-3 px-8 rounded-lg bg-fuchsia-700 button font-bold">{isLogin ? `${isSubmitting ? 'Logging In...' : 'Login'}` : `${isSubmitting ? 'Creating Account...' : 'Create Account'}`}</motion.button>
                         <button
                             type='button'
                             onClick={switchAuthModeHandler}
