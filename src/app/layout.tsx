@@ -19,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <div id="portal-root"></div>
         <NextAuthProvider>
           <Navbar />
           {children}
