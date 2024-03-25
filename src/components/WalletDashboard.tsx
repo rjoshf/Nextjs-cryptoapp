@@ -12,6 +12,7 @@ import bitcoinImg from '../../public/bitcoin.svg';
 import ethereumImg from '../../public/ethereum.svg';
 import Modal from './UI/Modal';
 import Deposit from './UI/Deposit';
+import Withdraw from './UI/Withdraw';
 
 interface Cryptos {
     bitcoin: { usd: number },
@@ -20,7 +21,10 @@ interface Cryptos {
 
 const WalletDashboard: React.FC<{ cryptos: Cryptos }> = ({ cryptos }) => {
 
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState({
+        deposit: false,
+        withdraw: false
+    });
 
     const { data: session } = useSession();
 
@@ -29,24 +33,26 @@ const WalletDashboard: React.FC<{ cryptos: Cryptos }> = ({ cryptos }) => {
     const bitcoinTotal = bitcoinAmount * cryptos.bitcoin.usd;
     const ethereumTotal = ethereumAmount * cryptos.ethereum.usd;
 
-    const showModalHandler = () => {
-        setShowModal(true);
-    }
-
-    const closeModalHandler = () => {
-        setShowModal(false);
-    }
+    const handleModal = (modalType: string, action: boolean) => {
+        setShowModal(prevState => ({
+            ...prevState,
+            [modalType]: action
+        }));
+    };
 
     return (
         <motion.section viewport={{ once: true, amount: 0.8 }} initial={{ opacity: 0, y: 15, scale: 0.99 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} transition={{ type: 'tween', duration: 0.75 }}>
             <h1 className="text-center mb-8 font-bold">Wallet</h1>
-            <Modal open={showModal ? true : false} onClose={closeModalHandler}>
-                <Deposit onCancel={closeModalHandler} />
+            <Modal open={showModal.deposit} onClose={() => handleModal('deposit', false)}>
+                <Deposit onCancel={() => handleModal('deposit', false)} />
+            </Modal>
+            <Modal open={showModal.withdraw} onClose={() => handleModal('withdraw', false)}>
+                <Withdraw onCancel={() => handleModal('withdraw', false)} />
             </Modal>
             <div className="flex justify-center items-center flex-col info-card w-4/12 m-auto bg-purple-800 bg-opacity-15 rounded-lg py-5 px-5">
                 <div className="flex justify-between items-center w-full">
-                    <button onClick={showModalHandler} className="m-5 py-3 px-8 rounded-lg bg-fuchsia-700 button font-bold">Deposit</button>
-                    <button className="m-5 py-3 px-8 rounded-lg bg-fuchsia-700 button font-bold">Withdraw</button>
+                    <button onClick={() => handleModal('deposit', true)} className="m-5 py-3 px-8 rounded-lg bg-fuchsia-700 button font-bold">Deposit</button>
+                    <button onClick={() => handleModal('withdraw', true)} className="m-5 py-3 px-8 rounded-lg bg-fuchsia-700 button font-bold">Withdraw</button>
                 </div>
                 <div className="grid grid-cols-4 gap-4 items-center w-full">
                     <h2>Coin</h2>

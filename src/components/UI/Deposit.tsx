@@ -4,7 +4,7 @@ const Deposit: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
     return (
         <div>
             <h2>Deposit</h2>
-            <label htmlFor="assestSelect" className="block">Choose an asset to Deposit:</label>
+            <label htmlFor="assestSelect" className="block">Choose an asset to deposit:</label>
             <select id="assestSelect" className="text-black">
                 <option>Bitcoin</option>
                 <option>Ethereum</option>
