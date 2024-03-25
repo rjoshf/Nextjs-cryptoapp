@@ -11,6 +11,7 @@ import Image from 'next/image';
 import bitcoinImg from '../../public/bitcoin.svg';
 import ethereumImg from '../../public/ethereum.svg';
 import Modal from './UI/Modal';
+import Deposit from './UI/Deposit';
 
 interface Cryptos {
     bitcoin: { usd: number },
@@ -40,7 +41,7 @@ const WalletDashboard: React.FC<{ cryptos: Cryptos }> = ({ cryptos }) => {
         <motion.section viewport={{ once: true, amount: 0.8 }} initial={{ opacity: 0, y: 15, scale: 0.99 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} transition={{ type: 'tween', duration: 0.75 }}>
             <h1 className="text-center mb-8 font-bold">Wallet</h1>
             <Modal open={showModal ? true : false} onClose={closeModalHandler}>
-                <p>Test</p>
+                <Deposit onCancel={closeModalHandler} />
             </Modal>
             <div className="flex justify-center items-center flex-col info-card w-4/12 m-auto bg-purple-800 bg-opacity-15 rounded-lg py-5 px-5">
                 <div className="flex justify-between items-center w-full">
