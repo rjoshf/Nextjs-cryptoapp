@@ -7,8 +7,6 @@ import { useSession, signOut } from 'next-auth/react';
 const Navbar: React.FC<{}> = ({ }) => {
     const { data: session } = useSession();
 
-    console.log(session)
-
     const [isFixed, setIsFixed] = useState(false);
 
     useEffect(() => {

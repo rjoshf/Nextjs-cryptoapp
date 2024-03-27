@@ -1,19 +1,21 @@
 import { useState } from 'react';
-
 import { motion } from 'framer-motion';
 
 const Deposit: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
-
     const [selectedAssest, setSelectedAssest] = useState("bitcoin");
 
-    const [enteredNumber, setEnteredNumber] = useState(0);
+    const [enteredNumber, setEnteredNumber] = useState("");
 
     const assestChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedAssest(event.target.value)
     }
 
     const amountChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setEnteredNumber(+event.target.value);
+        setEnteredNumber(event.target.value);
+    }
+
+    const depositHandler = () => {
+        console.log(+enteredNumber, selectedAssest)
     }
 
     return (
@@ -30,7 +32,7 @@ const Deposit: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
                 <motion.button whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 100 }} onClick={onCancel}>
                     Cancel
                 </motion.button>
-                <motion.button whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 100 }} onClick={onCancel}>
+                <motion.button whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 100 }} onClick={depositHandler}>
                     Deposit
                 </motion.button>
             </div>

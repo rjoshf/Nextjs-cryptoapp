@@ -139,6 +139,15 @@ h1 {
   box-shadow: 1px 1px 8px 6px rgba(245, 241, 255, 0.2);
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 @keyframes bounce {
   0%, 100% {
