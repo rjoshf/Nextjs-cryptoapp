@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
+import { useSession } from 'next-auth/react';
+
 const Deposit: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
+
     const [selectedAssest, setSelectedAssest] = useState("Bitcoin");
 
     const [enteredNumber, setEnteredNumber] = useState("");
+
+    const { data: session, update } = useSession();
 
     const assestChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedAssest(event.target.value)
@@ -15,14 +20,22 @@ const Deposit: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
     }
 
     const depositHandler = async () => {
-        console.log(selectedAssest)
-        await fetch("/api/deposit", {
+
+        const response = await fetch("/api/deposit", {
             method: 'PATCH',
             body: JSON.stringify({ selectedAssest, enteredNumber: +enteredNumber }),
             headers: {
                 'Content-Type': 'application/json'
             }
         });
+
+        if (response.ok && selectedAssest === "Bitcoin" && session?.user.bitcoin_amount !== undefined) {
+            const newBitcoinAmount = +enteredNumber + session?.user.bitcoin_amount;
+            await update({ bitcoin_amount: newBitcoinAmount });
+        } else if (response.ok && selectedAssest === "Ethereum" && session?.user.ethereum_amount !== undefined) {
+            const newEthereumAmount = +enteredNumber + session?.user.ethereum_amount;
+            await update({ ethereum_amount: newEthereumAmount });
+        }
     }
 
     return (

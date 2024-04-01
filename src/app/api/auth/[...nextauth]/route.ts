@@ -68,21 +68,37 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      // Add custom fields to the token if user object exists
+    async jwt({ token, user, session, trigger }) {
+
+      if (trigger === "update" && session?.bitcoin_amount) {
+        token.bitcoin_amount = session.bitcoin_amount
+      }
+
+      if (trigger === "update" && session?.ethereum_amount) {
+        token.ethereum_amount = session.ethereum_amount
+      }
+
       if (user) {
-        token.ethereum_amount = user.ethereum_amount;
-        token.bitcoin_amount = user.bitcoin_amount;
+        return {
+          ...token,
+          id: user.id,
+          ethereum_amount: user.ethereum_amount,
+          bitcoin_amount: user.bitcoin_amount,
+        };
       }
       return token;
     },
     async session({ session, token }) {
-      // Add custom fields to the session's user object
-      if (session.user) {
-        session.user.ethereum_amount = token.ethereum_amount as number | undefined;
-        session.user.bitcoin_amount = token.bitcoin_amount as number | undefined;
+      
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id,
+          ethereum_amount: token.ethereum_amount,
+          bitcoin_amount: token.bitcoin_amount,
+        }
       }
-      return session;
     },
   },
 };
