@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const Deposit: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
-    const [selectedAssest, setSelectedAssest] = useState("bitcoin");
+    const [selectedAssest, setSelectedAssest] = useState("Bitcoin");
 
     const [enteredNumber, setEnteredNumber] = useState("");
 
@@ -15,10 +15,10 @@ const Deposit: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
     }
 
     const depositHandler = async () => {
-        console.log(+enteredNumber, selectedAssest)
+        console.log(selectedAssest)
         await fetch("/api/deposit", {
             method: 'PATCH',
-            body: JSON.stringify({ selectedAssest, enteredNumber }),
+            body: JSON.stringify({ selectedAssest, enteredNumber: +enteredNumber }),
             headers: {
                 'Content-Type': 'application/json'
             }
