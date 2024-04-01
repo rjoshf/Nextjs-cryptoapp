@@ -14,8 +14,15 @@ const Deposit: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
         setEnteredNumber(event.target.value);
     }
 
-    const depositHandler = () => {
+    const depositHandler = async () => {
         console.log(+enteredNumber, selectedAssest)
+        await fetch("/api/deposit", {
+            method: 'PATCH',
+            body: JSON.stringify({ selectedAssest, enteredNumber }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
     }
 
     return (
