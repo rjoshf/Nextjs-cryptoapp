@@ -12,7 +12,7 @@ export async function PATCH(req: Request) {
     console.log(enteredNumber)
 
     const session = await getServerSession(authOptions);
-    // Protecting the API route. 
+
     if (!session) {
         return new Response(JSON.stringify({message: "Not authenticated!"}), {status: 401,});
     }
@@ -25,13 +25,11 @@ export async function PATCH(req: Request) {
 
     const user = await usersCollection.findOne({email: userEmail});
 
-    // Check user exists.
     if (!user) {
         client.close()
         return new Response(JSON.stringify({message: "User not found!"}), {status: 404})
     }
 
-    // Process deposit based on selected asset.
     if (selectedAssest === "Bitcoin") {
         const newBitcoinAmount = enteredNumber + session.user.bitcoin_amount;
         console.log(newBitcoinAmount);
@@ -44,7 +42,6 @@ export async function PATCH(req: Request) {
         client.close();
         return new Response(JSON.stringify({message: "Ethereum successfully deposited!"}), {status: 200})
     } else {
-        // Handle unsupported asset types.
         client.close();
         return new Response(JSON.stringify({message: "Unsupported asset type!"}), {status: 400})
     }

@@ -4,16 +4,30 @@ import { motion } from 'framer-motion';
 
 const Withdraw: React.FC<{ onCancel: () => void; }> = ({ onCancel }) => {
 
-    const [selectedAssest, setSelectedAssest] = useState("bitcoin");
+    const [selectedAssest, setSelectedAssest] = useState("Bitcoin");
 
-    const [enteredNumber, setEnteredNumber] = useState(0);
+    const [enteredNumber, setEnteredNumber] = useState("");
 
     const assestChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedAssest(event.target.value)
     }
 
     const amountChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setEnteredNumber(+event.target.value);
+        setEnteredNumber(event.target.value);
+    }
+
+    const withdrawHandler = async () => {
+
+        console.log(selectedAssest, +enteredNumber);
+
+        const response = await fetch("/api/withdraw", {
+            method: 'PATCH',
+            body: JSON.stringify({ selectedAssest, enteredNumber: +enteredNumber }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
     }
 
     return (
@@ -30,8 +44,8 @@ const Withdraw: React.FC<{ onCancel: () => void; }> = ({ onCancel }) => {
                 <motion.button whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 100 }} onClick={onCancel}>
                     Cancel
                 </motion.button>
-                <motion.button whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 100 }} onClick={onCancel}>
-                    Deposit
+                <motion.button whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 100 }} onClick={withdrawHandler}>
+                    Withdraw
                 </motion.button>
             </div>
         </div>
