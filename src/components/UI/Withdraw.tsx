@@ -2,11 +2,15 @@ import { useState } from 'react';
 
 import { motion } from 'framer-motion';
 
+import { useSession } from 'next-auth/react';
+
 const Withdraw: React.FC<{ onCancel: () => void; }> = ({ onCancel }) => {
 
     const [selectedAssest, setSelectedAssest] = useState("Bitcoin");
 
     const [enteredNumber, setEnteredNumber] = useState("");
+
+    const { data: session, update } = useSession();
 
     const assestChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedAssest(event.target.value)
@@ -27,6 +31,14 @@ const Withdraw: React.FC<{ onCancel: () => void; }> = ({ onCancel }) => {
                 'Content-Type': 'application/json'
             }
         })
+
+        if (response.ok && selectedAssest === "Bitcoin" && session?.user.bitcoin_amount !== undefined) {
+            const newBitcoinAmount = session?.user.bitcoin_amount - (+enteredNumber);
+            await update({ bitcoin_amount: newBitcoinAmount });
+        } else if (response.ok && selectedAssest === "Ethereum" && session?.user.ethereum_amount !== undefined) {
+            const newEthereumAmount = session?.user.ethereum_amount - (+enteredNumber);
+            await update({ ethereum_amount: newEthereumAmount });
+        }
 
     }
 

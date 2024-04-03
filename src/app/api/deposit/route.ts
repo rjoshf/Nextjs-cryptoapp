@@ -7,9 +7,6 @@ export async function PATCH(req: Request) {
     const data = await req.json();
 
     const { selectedAssest, enteredNumber } = data;
-    
-    console.log(selectedAssest)
-    console.log(enteredNumber)
 
     const session = await getServerSession(authOptions);
 
@@ -32,7 +29,6 @@ export async function PATCH(req: Request) {
 
     if (selectedAssest === "Bitcoin") {
         const newBitcoinAmount = enteredNumber + session.user.bitcoin_amount;
-        console.log(newBitcoinAmount);
         await usersCollection.updateOne({email: userEmail}, { $set: {bitcoin_amount: newBitcoinAmount} });
         client.close();
         return new Response(JSON.stringify({message: "Bitcoin successfully deposited!"}), {status: 200})
