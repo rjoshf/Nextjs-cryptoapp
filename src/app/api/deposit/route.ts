@@ -14,7 +14,7 @@ export async function PATCH(req: Request) {
     const session = await getServerSession(authOptions);
 
     if (!session) {
-        return new Response(JSON.stringify({message: "Not authenticated!"}), {status: 401,});
+        return new Response(JSON.stringify({message: "Not authenticated!"}), {status: 401});
     }
 
     const userEmail = session.user.email;
