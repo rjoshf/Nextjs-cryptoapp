@@ -62,13 +62,13 @@ const WalletDashboard: React.FC<{ cryptos: Cryptos }> = ({ cryptos }) => {
                 </div>
                 <div className="grid grid-cols-4 gap-4 items-center w-full m-5">
                     <h2><Image className="inline mr-2" width={25} height={25} src={bitcoinImg} alt={"Image of a bitcoin"} />Bitcoin</h2>
-                    <h2 className="text-center">{session?.user?.bitcoin_amount}</h2>
+                    <h2 className="text-center">{session?.user?.bitcoin_amount?.toFixed(4)}</h2>
                     <h2 className="text-center">{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(cryptos.bitcoin.usd)}`}</h2>
                     <h2 className="text-end">{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(bitcoinTotal)}`}</h2>
                 </div>
                 <div className="grid grid-cols-4 gap-4 items-center w-full m-5">
                     <h2><Image className="inline mr-2" width={25} height={25} src={ethereumImg} alt={"Image of an ethereum"} />Ethereum</h2>
-                    <h2 className="text-center">{session?.user?.ethereum_amount}</h2>
+                    <h2 className="text-center">{session?.user?.ethereum_amount?.toFixed(4)}</h2>
                     <h2 className="text-center">{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(cryptos.ethereum.usd)}`}</h2>
                     <h2 className="text-end">{`${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(ethereumTotal)}`}</h2>
                 </div>
