@@ -17,7 +17,7 @@ async function createUser(email: string, password: string) {
     const data = await response.json();
 
     if (!response.ok) {
-        throw new Error('Something went wrong.');
+        throw new Error(data.message);
     }
 
     return data;
