@@ -5,6 +5,8 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from "next/navigation";
 import { motion } from 'framer-motion';
 
+import ErrorCard from './UI/ErrorCard';
+
 async function createUser(email: string, password: string) {
     const response = await fetch('/api/createuser', {
         method: 'POST',
@@ -29,6 +31,8 @@ const Login: React.FC<{}> = ({ }) => {
     const passwordInputRef = useRef<HTMLInputElement>(null);
     const [isLogin, setIsLogin] = useState(true);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     function switchAuthModeHandler() {
         setIsLogin((prevState) => !prevState);
@@ -38,6 +42,7 @@ const Login: React.FC<{}> = ({ }) => {
         event.preventDefault();
 
         setIsSubmitting(true);
+        setIsError(false);
         const enteredEmail = emailInputRef.current?.value;
         const enteredPassword = passwordInputRef.current?.value;
 
@@ -62,7 +67,13 @@ const Login: React.FC<{}> = ({ }) => {
                 await signIn('credentials', { redirect: false, email: enteredEmail, password: enteredPassword });
                 router.replace('/');
             } catch (error) {
-                console.log(error);
+                if (error instanceof Error) {
+                    setIsError(true);
+                    setErrorMessage(error.message);
+                } else {
+                    setIsError(true);
+                    setErrorMessage("An unexpected error occurred.");
+                }
                 setIsSubmitting(false);
             }
         }
@@ -90,6 +101,7 @@ const Login: React.FC<{}> = ({ }) => {
                         >
                             {isLogin ? 'Create new account' : 'Login with existing account'}
                         </button>
+                        {isError && <ErrorCard errorMessage={errorMessage} />}
                     </div>
                 </form>
             </motion.section>
