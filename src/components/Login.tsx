@@ -54,11 +54,12 @@ const Login: React.FC<{}> = ({ }) => {
         if (isLogin) {
             const result = await signIn('credentials', { redirect: false, email: enteredEmail, password: enteredPassword, })
 
-            if (!result!.error) {
-                router.replace('/')
-            } else {
-                console.log(result?.error)
+            if (result && result.error) {
+                setIsError(true);
+                setErrorMessage(result.error);
                 setIsSubmitting(false);
+            } else {
+                router.replace('/');
             }
         } else {
             try {

@@ -53,7 +53,7 @@ export const authOptions: NextAuthOptions = {
 
         if (!isValid) {
           client.close();
-          throw new Error('Could not log you in!');
+          throw new Error('Could not log you in! Password is incorrect!');
         }
 
         client.close();
