@@ -1,4 +1,4 @@
-const Skeleton: React.FC<{}> = ({ }) => {
+export default function Skeleton() {
     const repeatArray = Array.from({ length: 10 });
 
     return (
@@ -29,5 +29,3 @@ const Skeleton: React.FC<{}> = ({ }) => {
         </section>
     )
 }
-
-export default Skeleton;

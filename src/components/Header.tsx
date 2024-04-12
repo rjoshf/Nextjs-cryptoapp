@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 import { useSession } from 'next-auth/react';
 
-const Header: React.FC<{}> = ({ }) => {
+export default function Header() {
     const { data: session } = useSession();
 
     return (
@@ -28,5 +28,3 @@ const Header: React.FC<{}> = ({ }) => {
         </section>
     )
 }
-
-export default Header;

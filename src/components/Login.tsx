@@ -25,7 +25,7 @@ async function createUser(email: string, password: string) {
     return data;
 }
 
-const Login: React.FC<{}> = ({ }) => {
+export default function Login() {
     const router = useRouter();
     const emailInputRef = useRef<HTMLInputElement>(null);
     const passwordInputRef = useRef<HTMLInputElement>(null);
@@ -109,5 +109,3 @@ const Login: React.FC<{}> = ({ }) => {
         </>
     )
 }
-
-export default Login;

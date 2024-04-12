@@ -24,7 +24,7 @@ const defaultAnimations = {
     }
 }
 
-const InfoSection: React.FC<{}> = ({ }) => {
+export default function InfoSection() {
     const inViewRef = useRef(null);
     const isInView = useInView(inViewRef, { amount: 0.3, once: true });
 
@@ -86,5 +86,3 @@ const InfoSection: React.FC<{}> = ({ }) => {
         </section>
     )
 }
-
-export default InfoSection;

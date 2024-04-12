@@ -19,8 +19,7 @@ interface Cryptos {
     ethereum: { usd: number },
 }
 
-const WalletDashboard: React.FC<{ cryptos: Cryptos }> = ({ cryptos }) => {
-
+export default function WalletDashboard({ cryptos }: { cryptos: Cryptos }) {
     const [showModal, setShowModal] = useState({
         deposit: false,
         withdraw: false
@@ -76,5 +75,3 @@ const WalletDashboard: React.FC<{ cryptos: Cryptos }> = ({ cryptos }) => {
         </motion.section>
     )
 }
-
-export default WalletDashboard;

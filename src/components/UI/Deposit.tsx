@@ -3,8 +3,7 @@ import { motion } from 'framer-motion';
 
 import { useSession } from 'next-auth/react';
 
-const Deposit: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
-
+export default function Deposit({ onCancel }: { onCancel: () => void }) {
     const [selectedAssest, setSelectedAssest] = useState("Bitcoin");
 
     const [enteredNumber, setEnteredNumber] = useState("");
@@ -59,5 +58,3 @@ const Deposit: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
         </div>
     )
 }
-
-export default Deposit;

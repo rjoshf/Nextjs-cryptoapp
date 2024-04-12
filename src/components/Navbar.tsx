@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 
-const Navbar: React.FC<{}> = ({ }) => {
+export default function Navbar() {
     const { data: session } = useSession();
 
     const [isFixed, setIsFixed] = useState(false);
@@ -46,5 +46,3 @@ const Navbar: React.FC<{}> = ({ }) => {
         </>
     )
 }
-
-export default Navbar;

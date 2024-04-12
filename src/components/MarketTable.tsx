@@ -13,8 +13,7 @@ interface Crypto {
     market_cap: number;
 }
 
-const MarketTable: React.FC<{ cryptos: Crypto[] | unknown }> = ({ cryptos }) => {
-
+export default function MarketTable({ cryptos }: { cryptos: Crypto[] | unknown }) {
     return (
         <section className="flex flex-col items-center mt-20">
             <motion.h2 viewport={{ once: true, amount: 0.8 }} initial={{ opacity: 0, y: 15, scale: 0.99 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} transition={{ type: 'tween', duration: 0.75 }} className="font-bold text-7xl mb-10 market-update-title">Market Update</motion.h2>
@@ -40,5 +39,3 @@ const MarketTable: React.FC<{ cryptos: Crypto[] | unknown }> = ({ cryptos }) => 
         </section>
     )
 }
-
-export default MarketTable

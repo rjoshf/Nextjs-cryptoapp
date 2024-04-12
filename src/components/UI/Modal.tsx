@@ -1,9 +1,9 @@
-import React, { useRef, MouseEvent } from 'react';
+import React, { useRef, MouseEvent, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 
 import { motion } from 'framer-motion';
 
-const Modal: React.FC<{ open: boolean; children: React.ReactNode; onClose: () => void }> = ({ open, children, onClose }) => {
+export default function Modal({ open, children, onClose }: { open: boolean; children: ReactNode; onClose: () => void }) {
     const dialogRef = useRef<HTMLDivElement>(null);
     const handleDialogClick = (event: MouseEvent) => {
         event.stopPropagation(); // Prevent click from propagating to the backdrop
@@ -21,6 +21,4 @@ const Modal: React.FC<{ open: boolean; children: React.ReactNode; onClose: () =>
         ),
         document.getElementById('portal-root')!
     );
-};
-
-export default Modal;
+}
