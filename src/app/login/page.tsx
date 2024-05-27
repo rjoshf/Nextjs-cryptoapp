@@ -1,8 +1,8 @@
 import { getServerSession } from 'next-auth';
-import Login from '../../components/Login';
 
 import { authOptions } from '../api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
+import Login from '@/components/Login';
 
 export default async function LoginPage() {
 
@@ -16,5 +16,5 @@ export default async function LoginPage() {
         <main className="min-h-screen">
             <Login />
         </main>
-    )
+    );
 }
