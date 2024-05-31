@@ -17,7 +17,7 @@ export default function Header() {
         <section className="flex flex-col items-center p-10">
             <div className="flex flex-row items-center">
                 <Image className="mr-10 bounce" width={75} height={75} src={bitcoinImg} alt={"Image of a bitcoin"} />
-                <h1 className="font-bold">NextCrypto</h1>
+                <h1 className="font-bold">Next Crypto</h1>
                 <Image className="ml-10 bounce" width={75} height={75} src={ethereumImg} alt={"Image of an ethereum"} />
             </div>
             <motion.div className="mt-14" whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 100 }}>
