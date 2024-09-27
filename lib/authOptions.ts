@@ -1,8 +1,8 @@
-import { NextAuthOptions } from 'next-auth';
+// lib/authOptions.ts
+import { NextAuthOptions, DefaultSession } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { connectToDatabase } from '../../../../../lib/db';
-import { verifyPassword } from '../../../../../lib/auth';
-import { DefaultSession } from 'next-auth';
+import { connectToDatabase } from './db'; // adjust the path if necessary
+import { verifyPassword } from './auth'; // adjust the path if necessary
 
 declare module 'next-auth' {
   interface User {
