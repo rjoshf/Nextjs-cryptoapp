@@ -4,18 +4,16 @@ import { connectToDatabase } from '../../../../../lib/db';
 import { verifyPassword } from '../../../../../lib/auth';
 import { DefaultSession } from 'next-auth';
 
-// Extend the User model
-declare module "next-auth" {
+declare module 'next-auth' {
   interface User {
     ethereum_amount?: number;
     bitcoin_amount?: number;
   }
-  // Extend the Session model
   interface Session {
     user: {
       ethereum_amount?: number;
       bitcoin_amount?: number;
-    } & DefaultSession["user"];
+    } & DefaultSession['user'];
   }
 }
 
@@ -23,14 +21,14 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
-  
+
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
         if (!credentials || !credentials.email || !credentials.password) {
@@ -49,7 +47,10 @@ export const authOptions: NextAuthOptions = {
           throw new Error('No user found!');
         }
 
-        const isValid = await verifyPassword(credentials.password, user.password);
+        const isValid = await verifyPassword(
+          credentials.password,
+          user.password
+        );
 
         if (!isValid) {
           client.close();
@@ -69,13 +70,12 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user, session, trigger }) {
-
-      if (trigger === "update" && session?.bitcoin_amount) {
-        token.bitcoin_amount = session.bitcoin_amount
+      if (trigger === 'update' && session?.bitcoin_amount) {
+        token.bitcoin_amount = session.bitcoin_amount;
       }
 
-      if (trigger === "update" && session?.ethereum_amount) {
-        token.ethereum_amount = session.ethereum_amount
+      if (trigger === 'update' && session?.ethereum_amount) {
+        token.ethereum_amount = session.ethereum_amount;
       }
 
       if (user) {
@@ -89,7 +89,6 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      
       return {
         ...session,
         user: {
@@ -97,12 +96,12 @@ export const authOptions: NextAuthOptions = {
           id: token.id,
           ethereum_amount: token.ethereum_amount,
           bitcoin_amount: token.bitcoin_amount,
-        }
-      }
+        },
+      };
     },
   },
 };
 
-const handler = NextAuth(authOptions)
+const handler = NextAuth(authOptions);
 
-export {handler as GET, handler as POST}
+export { handler as GET, handler as POST };
